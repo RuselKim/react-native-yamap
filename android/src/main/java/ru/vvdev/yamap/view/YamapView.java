@@ -3,10 +3,8 @@ package ru.vvdev.yamap.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.view.View;
 import android.util.AttributeSet;
-
-import androidx.annotation.NonNull;
+import android.view.View;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
@@ -33,10 +31,12 @@ import com.yandex.mapkit.map.CameraListener;
 import com.yandex.mapkit.map.CameraPosition;
 import com.yandex.mapkit.map.CameraUpdateSource;
 import com.yandex.mapkit.map.CircleMapObject;
+import com.yandex.mapkit.map.IconStyle;
 import com.yandex.mapkit.map.InputListener;
 import com.yandex.mapkit.map.PlacemarkMapObject;
 import com.yandex.mapkit.map.PolygonMapObject;
 import com.yandex.mapkit.map.PolylineMapObject;
+import com.yandex.mapkit.map.RotationType;
 import com.yandex.mapkit.map.VisibleRegion;
 import com.yandex.mapkit.mapview.MapView;
 import com.yandex.mapkit.transport.TransportFactory;
@@ -65,6 +65,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import androidx.annotation.NonNull;
 import ru.vvdev.yamap.models.ReactMapObject;
 import ru.vvdev.yamap.utils.Callback;
 import ru.vvdev.yamap.utils.ImageLoader;
@@ -555,7 +556,10 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
             PlacemarkMapObject arrow = userLocationView.getArrow();
             if (userLocationBitmap != null) {
                 pin.setIcon(ImageProvider.fromBitmap(userLocationBitmap));
-                arrow.setIcon(ImageProvider.fromBitmap(userLocationBitmap));
+                arrow.setIcon(
+                        ImageProvider.fromBitmap(userLocationBitmap),
+                        IconStyle().setRotationType(RotationType.ROTATE)
+                );
             }
             CircleMapObject circle = userLocationView.getAccuracyCircle();
             if (userLocationAccuracyFillColor != 0) {
