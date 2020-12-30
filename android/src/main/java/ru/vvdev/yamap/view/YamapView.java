@@ -31,6 +31,7 @@ import com.yandex.mapkit.map.CameraListener;
 import com.yandex.mapkit.map.CameraPosition;
 import com.yandex.mapkit.map.CameraUpdateSource;
 import com.yandex.mapkit.map.CircleMapObject;
+import com.yandex.mapkit.map.CompositeIcon;
 import com.yandex.mapkit.map.IconStyle;
 import com.yandex.mapkit.map.InputListener;
 import com.yandex.mapkit.map.PlacemarkMapObject;
@@ -84,7 +85,11 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
         put("walk", "#333333");
     }};
     private String userLocationIcon = "";
-    private Bitmap userLocationBitmap = null;
+    private Bitmap userLocationIconBitmap = null;
+    private Float userLocationIconScale = 0f;
+    private String userLocationArrowIcon = "";
+    private Bitmap userLocationArrowBitmap = null;
+    private Float userLocationArrowScale = 0f;
 
     private RouteManager routeMng = new RouteManager();
     private MasstransitRouter masstransitRouter = TransportFactory.getInstance().createMasstransitRouter();
@@ -323,15 +328,41 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
     public void setUserLocationIcon(final String iconSource) {
         // todo[0]: можно устанавливать разные иконки на покой и движение. Дополнительно можно устанавливать стиль иконки, например scale
         userLocationIcon = iconSource;
+
         ImageLoader.DownloadImageBitmap(getContext(), iconSource, new Callback<Bitmap>() {
             @Override
             public void invoke(Bitmap bitmap) {
                 if (iconSource.equals(userLocationIcon)) {
-                    userLocationBitmap = bitmap;
+                    userLocationIconBitmap = bitmap;
                     updateUserLocationIcon();
                 }
             }
         });
+    }
+
+    public void setUserLocationArrowIcon(final String arrowIconSource) {
+        // todo[0]: можно устанавливать разные иконки на покой и движение. Дополнительно можно устанавливать стиль иконки, например scale
+        userLocationArrowIcon = arrowIconSource;
+
+        ImageLoader.DownloadImageBitmap(getContext(), arrowIconSource, new Callback<Bitmap>() {
+            @Override
+            public void invoke(Bitmap bitmap) {
+                if (arrowIconSource.equals(userLocationArrowIcon)) {
+                    userLocationArrowBitmap = bitmap;
+                    updateUserLocationIcon();
+                }
+            }
+        });
+    }
+
+    public void setUserLocationIconScale(final float iconScale) {
+        userLocationIconScale = iconScale;
+        updateUserLocationIcon();
+    }
+
+    public void setUserLocationArrowIconScale(final float arrowIconScale) {
+        userLocationArrowScale = arrowIconScale;
+        updateUserLocationIcon();
     }
 
     public void setUserLocationAccuracyFillColor(int color) {
@@ -552,15 +583,47 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
 
     private void updateUserLocationIcon() {
         if (userLocationView != null) {
-            PlacemarkMapObject pin = userLocationView.getPin();
-            PlacemarkMapObject arrow = userLocationView.getArrow();
-            if (userLocationBitmap != null) {
-                pin.setIcon(ImageProvider.fromBitmap(userLocationBitmap));
+            CompositeIcon pin = userLocationView.getPin().useCompositeIcon();
+            CompositeIcon arrow = userLocationView.getArrow().useCompositeIcon();
+
+            if (userLocationPinBitmap != null) {
+                pin.setIcon(
+                        "icon",
+                        ImageProvider.fromBitmap(userLocationPinBitmap),
+                        new IconStyle().setAnchor(PointF(0f, 0f))
+                                .setZIndex(0f)
+                                .setScale(userLocationPinScale)
+                );
+
                 arrow.setIcon(
-                        ImageProvider.fromBitmap(userLocationBitmap),
-                        IconStyle().setRotationType(RotationType.ROTATE)
+                        "icon",
+                        ImageProvider.fromBitmap(userLocationPinBitmap),
+                        new IconStyle().setAnchor(PointF(0f, 0f))
+                                .setZIndex(1f)
+                                .setScale(userLocationPinScale)
                 );
             }
+
+            if (userLocationArrowBitmap != null) {
+                pin.setIcon(
+                        "pin",
+                        ImageProvider.fromBitmap(userLocationArrowBitmap),
+                        new IconStyle().setAnchor(PointF(0.7f, -0.7f))
+                                .setRotationType(RotationType.ROTATE)
+                                .setZIndex(1f)
+                                .setScale(userLocationArrowScale)
+                );
+
+                arrow.setIcon(
+                        "pin",
+                        ImageProvider.fromBitmap(userLocationArrowBitmap),
+                        new IconStyle().setAnchor(PointF(0.7f, -0.7f))
+                                .setRotationType(RotationType.ROTATE)
+                                .setZIndex(0f)
+                                .setScale(userLocationArrowScale)
+                );
+            }
+
             CircleMapObject circle = userLocationView.getAccuracyCircle();
             if (userLocationAccuracyFillColor != 0) {
                 circle.setFillColor(userLocationAccuracyFillColor);

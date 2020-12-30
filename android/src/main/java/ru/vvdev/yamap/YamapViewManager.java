@@ -13,7 +13,6 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
-import com.yandex.mapkit.map.VisibleRegion;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -168,6 +167,23 @@ public class YamapViewManager extends ViewGroupManager<YamapView> {
         if (icon != null) {
             castToYaMapView(view).setUserLocationIcon(icon);
         }
+    }
+
+    @ReactProp(name = "userLocationArrowIcon")
+    public void setUserLocationArrowIcon(View view, String arrowIcon) {
+        if (arrowIcon != null) {
+            castToYaMapView(view).setUserLocationArrowIcon(arrowIcon);
+        }
+    }
+
+    @ReactProp(name = "userLocationIconScale")
+    public void setUserLocationIconScale(View view, float iconScale) {
+        castToYaMapView(view).setUserLocationIconScale(iconScale);
+    }
+
+    @ReactProp(name = "userLocationArrowIconScale")
+    public void setUserLocationArrowIconScale(View view, float arrowScale) {
+        castToYaMapView(view).setUserLocationArrowIconScale(arrowScale);
     }
 
     @ReactProp(name = "userLocationAccuracyFillColor")
