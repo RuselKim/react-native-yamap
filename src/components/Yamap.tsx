@@ -180,6 +180,7 @@ export class YaMap extends React.Component<YaMapProps> {
       onCameraPositionReceived: this.processCameraPosition,
       onVisibleRegionReceived: this.processVisibleRegion,
       userLocationIcon: this.props.userLocationIcon ? this.resolveImageUri(this.props.userLocationIcon) : undefined,
+      userLocationArrowIcon: this.props.userLocationArrowIcon ? this.resolveImageUri(this.props.userLocationArrowIcon) : undefined,
     };
     processColorProps(props, 'userLocationAccuracyFillColor' as keyof YaMapProps);
     processColorProps(props, 'userLocationAccuracyStrokeColor' as keyof YaMapProps);
