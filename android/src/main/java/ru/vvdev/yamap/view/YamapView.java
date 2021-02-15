@@ -3,6 +3,7 @@ package ru.vvdev.yamap.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -586,10 +587,10 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
             CompositeIcon pin = userLocationView.getPin().useCompositeIcon();
             CompositeIcon arrow = userLocationView.getArrow().useCompositeIcon();
 
-            if (userLocationPinBitmap != null) {
+            if (userLocationIconBitmap != null) {
                 pin.setIcon(
                         "icon",
-                        ImageProvider.fromBitmap(userLocationPinBitmap),
+                        ImageProvider.fromBitmap(userLocationIconBitmap),
                         new IconStyle().setAnchor(PointF(0f, 0f))
                                 .setZIndex(0f)
                                 .setScale(userLocationPinScale)
@@ -597,7 +598,7 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
 
                 arrow.setIcon(
                         "icon",
-                        ImageProvider.fromBitmap(userLocationPinBitmap),
+                        ImageProvider.fromBitmap(userLocationIconBitmap),
                         new IconStyle().setAnchor(PointF(0f, 0f))
                                 .setZIndex(1f)
                                 .setScale(userLocationPinScale)
