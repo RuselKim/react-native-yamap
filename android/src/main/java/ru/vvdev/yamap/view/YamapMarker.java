@@ -95,8 +95,11 @@ public class YamapMarker extends ReactViewGroup implements MapObjectTapListener,
                     Bitmap b = Bitmap.createBitmap(_childView.getWidth(), _childView.getHeight(), Bitmap.Config.ARGB_8888);
                     Canvas c = new Canvas(b);
                     _childView.draw(c);
+                    Log.e("AAAAAAA", "_childView != null");
                     mapObject.setIcon(ImageProvider.fromBitmap(b));
+                    Log.e("AAAAAAA", "setIcon(ImageProvider.fromBitmap(b))");
                     mapObject.setIconStyle(iconStyle);
+                    Log.e("AAAAAAA", "setIconStyle(iconStyle)");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -135,6 +138,10 @@ public class YamapMarker extends ReactViewGroup implements MapObjectTapListener,
     public void setMapObject(MapObject obj) {
         mapObject = (PlacemarkMapObject) obj;
         mapObject.addTapListener(this);
+        IconStyle iconStyle = new IconStyle();
+        Log.e("AAAAAAAAAAA", String.valueOf(scale));
+        iconStyle.setScale(scale);
+        obj.setIconStyle(style);
         updateMarker();
     }
 

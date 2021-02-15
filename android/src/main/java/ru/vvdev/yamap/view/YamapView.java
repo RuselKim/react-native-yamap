@@ -282,7 +282,7 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
         }
 
         ArrayList<Point> lastKnownMarkers = new ArrayList<>();
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < childs.size(); ++i) {
             ReactMapObject obj = childs.get(i);
             if (obj instanceof YamapMarker) {
                 YamapMarker marker = (YamapMarker) obj;
