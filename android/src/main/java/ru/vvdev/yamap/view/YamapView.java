@@ -591,17 +591,17 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
                 pin.setIcon(
                         "icon",
                         ImageProvider.fromBitmap(userLocationIconBitmap),
-                        new IconStyle().setAnchor(PointF(0f, 0f))
+                        new IconStyle().setAnchor(new PointF(0f, 0f))
                                 .setZIndex(0f)
-                                .setScale(userLocationPinScale)
+                                .setScale(userLocationIconScale)
                 );
 
                 arrow.setIcon(
                         "icon",
                         ImageProvider.fromBitmap(userLocationIconBitmap),
-                        new IconStyle().setAnchor(PointF(0f, 0f))
+                        new IconStyle().setAnchor(new PointF(0f, 0f))
                                 .setZIndex(1f)
-                                .setScale(userLocationPinScale)
+                                .setScale(userLocationIconScale)
                 );
             }
 
@@ -609,7 +609,7 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
                 pin.setIcon(
                         "pin",
                         ImageProvider.fromBitmap(userLocationArrowBitmap),
-                        new IconStyle().setAnchor(PointF(0.7f, -0.7f))
+                        new IconStyle().setAnchor(new PointF(0.7f, -0.7f))
                                 .setRotationType(RotationType.ROTATE)
                                 .setZIndex(1f)
                                 .setScale(userLocationArrowScale)
@@ -618,7 +618,7 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
                 arrow.setIcon(
                         "pin",
                         ImageProvider.fromBitmap(userLocationArrowBitmap),
-                        new IconStyle().setAnchor(PointF(0.7f, -0.7f))
+                        new IconStyle().setAnchor(new PointF(0.7f, -0.7f))
                                 .setRotationType(RotationType.ROTATE)
                                 .setZIndex(0f)
                                 .setScale(userLocationArrowScale)
