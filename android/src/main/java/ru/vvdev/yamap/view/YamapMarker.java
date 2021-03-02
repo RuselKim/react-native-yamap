@@ -141,7 +141,7 @@ public class YamapMarker extends ReactViewGroup implements MapObjectTapListener,
         IconStyle iconStyle = new IconStyle();
         Log.e("AAAAAAAAAAA", String.valueOf(scale));
         iconStyle.setScale(scale);
-        obj.setIconStyle(iconStyle);
+        mapObject.setIconStyle(iconStyle);
         updateMarker();
     }
 
