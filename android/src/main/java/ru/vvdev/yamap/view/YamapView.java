@@ -90,7 +90,6 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
     private Float userLocationIconScale = 0f;
     private String userLocationArrowIcon = "";
     private Bitmap userLocationArrowBitmap = null;
-    private Float userLocationArrowScale = 0f;
 
     private RouteManager routeMng = new RouteManager();
     private MasstransitRouter masstransitRouter = TransportFactory.getInstance().createMasstransitRouter();
@@ -361,11 +360,6 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
         updateUserLocationIcon();
     }
 
-    public void setUserLocationArrowIconScale(final float arrowIconScale) {
-        userLocationArrowScale = arrowIconScale;
-        updateUserLocationIcon();
-    }
-
     public void setUserLocationAccuracyFillColor(int color) {
         userLocationAccuracyFillColor = color;
         updateUserLocationIcon();
@@ -589,17 +583,17 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
 
             if (userLocationIconBitmap != null) {
                 pin.setIcon(
-                        "icon",
+                        "pin",
                         ImageProvider.fromBitmap(userLocationIconBitmap),
-                        new IconStyle().setAnchor(new PointF(0f, 0f))
-                                .setZIndex(0f)
+                        new IconStyle().setAnchor(new PointF(0.5f, 0.5f))
+                                .setZIndex(1f)
                                 .setScale(userLocationIconScale)
                 );
 
                 arrow.setIcon(
-                        "icon",
+                        "pin",
                         ImageProvider.fromBitmap(userLocationIconBitmap),
-                        new IconStyle().setAnchor(new PointF(0f, 0f))
+                        new IconStyle().setAnchor(new PointF(0.5f, 0.5f))
                                 .setZIndex(1f)
                                 .setScale(userLocationIconScale)
                 );
@@ -607,21 +601,21 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
 
             if (userLocationArrowBitmap != null) {
                 pin.setIcon(
-                        "pin",
+                        "icon",
                         ImageProvider.fromBitmap(userLocationArrowBitmap),
-                        new IconStyle().setAnchor(new PointF(0.7f, -0.7f))
+                        new IconStyle().setAnchor(new PointF(0.5f, 1f))
                                 .setRotationType(RotationType.ROTATE)
                                 .setZIndex(1f)
-                                .setScale(userLocationArrowScale)
+                                .setScale(userLocationIconScale)
                 );
 
                 arrow.setIcon(
-                        "pin",
+                        "icon",
                         ImageProvider.fromBitmap(userLocationArrowBitmap),
-                        new IconStyle().setAnchor(new PointF(0.7f, -0.7f))
+                        new IconStyle().setAnchor(new PointF(0.5f, 1f))
                                 .setRotationType(RotationType.ROTATE)
                                 .setZIndex(0f)
-                                .setScale(userLocationArrowScale)
+                                .setScale(userLocationIconScale)
                 );
             }
 

@@ -181,11 +181,6 @@ public class YamapViewManager extends ViewGroupManager<YamapView> {
         castToYaMapView(view).setUserLocationIconScale(iconScale);
     }
 
-    @ReactProp(name = "userLocationArrowIconScale")
-    public void setUserLocationArrowIconScale(View view, float arrowScale) {
-        castToYaMapView(view).setUserLocationArrowIconScale(arrowScale);
-    }
-
     @ReactProp(name = "userLocationAccuracyFillColor")
     public void setUserLocationAccuracyFillColor(View view, int color) {
         castToYaMapView(view).setUserLocationAccuracyFillColor(color);
