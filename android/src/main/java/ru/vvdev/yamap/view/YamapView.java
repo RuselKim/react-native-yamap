@@ -87,7 +87,7 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
     }};
     private String userLocationIcon = "";
     private Bitmap userLocationIconBitmap = null;
-    private Float userLocationIconScale = 0f;
+    private Float userLocationIconScale = 1f;
     private String userLocationArrowIcon = "";
     private Bitmap userLocationArrowBitmap = null;
 
