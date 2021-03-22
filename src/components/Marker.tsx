@@ -50,7 +50,7 @@ export class Marker extends React.Component<MarkerProps, State> {
   private getProps() {
     return {
       ...this.props,
-      source: this.resolveImageUri(this.props.source),
+      source: Platform.OS === 'ios' ? this.resolveImageUri(this.props.source) : this.props.source,
     };
   }
 
